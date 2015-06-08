@@ -1,0 +1,15 @@
+---
+    # file: roles/common/tasks/main.yml
+    - name: ensure nginx is at the latest version
+      apt: name=nginx update_cache=yes
+      sudo: yes
+
+    - name: Copy Nginx default vhost
+      template: src=default dest=/etc/nginx/sites-available/default mode=0644 owner=root group=root
+      sudo: yes
+      notify: restart nginx
+
+    - name: disable default vhost
+      action: file path=/etc/nginx/sites-enabled/default state=absent
+      sudo: yes
+      notify: restart nginx

@@ -1,0 +1,6 @@
+---
+# file: backend.yml
+- hosts: backend
+  roles:
+    - common
+    - backend

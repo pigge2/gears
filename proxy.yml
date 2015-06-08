@@ -1,0 +1,6 @@
+---
+# file: proxy.yml
+- hosts: proxy
+  roles:
+    - common
+    - proxy

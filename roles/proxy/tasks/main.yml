@@ -1,0 +1,17 @@
+---
+    - name: Copy proxy.conf
+      template: src=proxy.conf dest=/etc/nginx/sites-available/proxy.conf mode=0644 owner=root group=root
+      sudo: yes
+
+    - name: enable proxy vhost
+      file: src=/etc/nginx/sites-available/proxy.conf dest=/etc/nginx/sites-enabled/proxy.conf mode=0644 owner=root group=root state=link
+      notify: restart nginx
+      sudo: yes
+
+    - name: Copy testlb
+      template: src=testlb dest=/usr/local/bin/testlb mode=0755 owner=root group=root
+      sudo: yes
+
+    - name: ensure curl is at the latest version
+      apt: name=curl
+      sudo: yes

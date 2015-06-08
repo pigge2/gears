@@ -1,0 +1,9 @@
+---
+    - name: Copy node.conf
+      template: src=node.conf dest=/etc/nginx/sites-available/node.conf mode=0644 owner=root group=root
+      sudo: yes
+
+    - name: enable node vhost
+      file: src=/etc/nginx/sites-available/node.conf dest=/etc/nginx/sites-enabled/node.conf mode=0644 owner=root group=root state=link
+      sudo: yes
+      notify: restart nginx
